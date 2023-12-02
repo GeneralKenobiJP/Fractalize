@@ -1,0 +1,6 @@
+# ninja log v5
+1	163	7232377250483254	build.ninja	a942fc4b979695cb
+2	351	7232336203089099	CMakeFiles/Fractalize.dir/src/main.cpp.obj	c31d9afeeb9232aa
+381	462	7232335217925294	Fractalize.exe	cdaa8e9262fa7b6
+1	191	7232377250483254	build.ninja	a942fc4b979695cb
+2	118	7232377252614382	Fractalize.exe	f27a96abb6ac13f3
