@@ -50,9 +50,10 @@ cmake_ninja_workdir = C$:/Users/kubap/CLionProjects/Fractalize/cmake-build-debug
 build cmake_object_order_depends_target_Fractalize: phony || CMakeFiles/Fractalize.dir
 
 build CMakeFiles/Fractalize.dir/src/main.cpp.obj: CXX_COMPILER__Fractalize_unscanned_Debug C$:/Users/kubap/CLionProjects/Fractalize/src/main.cpp || cmake_object_order_depends_target_Fractalize
+  DEFINES = -DGLEW_STATIC
   DEP_FILE = CMakeFiles\Fractalize.dir\src\main.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/kubap/CLionProjects/Fractalize/include -IC:/Users/kubap/CLionProjects/Fractalize/lib -isystem C:/Users/kubap/CLionProjects/Fractalize/include/GLFW
+  INCLUDES = -IC:/Users/kubap/CLionProjects/Fractalize/include -IC:/Users/kubap/CLionProjects/Fractalize/lib -isystem C:/Users/kubap/CLionProjects/Fractalize/include/GL -isystem C:/Users/kubap/CLionProjects/Fractalize/include/GLFW
   OBJECT_DIR = CMakeFiles\Fractalize.dir
   OBJECT_FILE_DIR = CMakeFiles\Fractalize.dir\src
 
@@ -64,9 +65,9 @@ build CMakeFiles/Fractalize.dir/src/main.cpp.obj: CXX_COMPILER__Fractalize_unsca
 #############################################
 # Link the executable Fractalize.exe
 
-build Fractalize.exe: CXX_EXECUTABLE_LINKER__Fractalize_Debug CMakeFiles/Fractalize.dir/src/main.cpp.obj | C$:/Users/kubap/CLionProjects/Fractalize/lib/lib-mingw-w64/libglfw3.a
+build Fractalize.exe: CXX_EXECUTABLE_LINKER__Fractalize_Debug CMakeFiles/Fractalize.dir/src/main.cpp.obj | C$:/Users/kubap/CLionProjects/Fractalize/lib/glew-2.1.0/glew32s.lib C$:/Users/kubap/CLionProjects/Fractalize/lib/lib-mingw-w64/libglfw3.a
   FLAGS = -g
-  LINK_LIBRARIES = C:/Users/kubap/CLionProjects/Fractalize/lib/lib-mingw-w64/libglfw3.a  -lOpengl32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = C:/Users/kubap/CLionProjects/Fractalize/lib/glew-2.1.0/glew32s.lib  C:/Users/kubap/CLionProjects/Fractalize/lib/lib-mingw-w64/libglfw3.a  -lOpengl32  -lUser32  -lGdi32  -lShell32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Fractalize.dir
   POST_BUILD = cd .
   PRE_LINK = cd .

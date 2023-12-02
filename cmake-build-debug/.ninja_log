@@ -1,6 +1,11 @@
 # ninja log v5
-1	163	7232377250483254	build.ninja	a942fc4b979695cb
-2	351	7232336203089099	CMakeFiles/Fractalize.dir/src/main.cpp.obj	c31d9afeeb9232aa
-381	462	7232335217925294	Fractalize.exe	cdaa8e9262fa7b6
-1	191	7232377250483254	build.ninja	a942fc4b979695cb
-2	118	7232377252614382	Fractalize.exe	f27a96abb6ac13f3
+1	159	7232438850842788	build.ninja	a942fc4b979695cb
+3	400	7232437915790379	CMakeFiles/Fractalize.dir/src/main.cpp.obj	e15a688ec3327f55
+442	548	7232435471363005	Fractalize.exe	de492d716ec56b54
+1	160	7232438850842788	build.ninja	a942fc4b979695cb
+3	428	7232438855788132	CMakeFiles/Fractalize.dir/src/main.cpp.obj	31e0e98e2bd40bca
+429	1247	7232438863923713	Fractalize.exe	8fc2cf46ce348a7f
+3	443	7232439410688760	CMakeFiles/Fractalize.dir/src/main.cpp.obj	31e0e98e2bd40bca
+444	1309	7232439419279458	Fractalize.exe	8fc2cf46ce348a7f
+3	383	7232440590532512	CMakeFiles/Fractalize.dir/src/main.cpp.obj	31e0e98e2bd40bca
+384	1255	7232440599208487	Fractalize.exe	8fc2cf46ce348a7f
