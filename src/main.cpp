@@ -4,6 +4,26 @@
 #include <fstream>
 #include <sstream>
 
+#define ASSERT(x) if(!(x)) __builtin_trap();
+#define GLCall(x) GLClearError(); \
+    x;                            \
+    ASSERT(GLLogCall())
+
+static void GLClearError()
+{
+    while(glGetError() != GL_NO_ERROR);
+}
+
+static bool GLLogCall()
+{
+    while(GLenum error = glGetError())
+    {
+        std::cout << &"[OpenGL Error] (" [ error] << ")" << std::endl;
+        return false;
+    }
+    return true;
+}
+
 struct ShaderProgramSource
 {
     std::string vertexSource;
@@ -105,6 +125,8 @@ int main()
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
+    glfwSwapInterval(1);
+
     if(glewInit() != GLEW_OK)
         std::cout << "Error. glewInit() != GLEW_OK" << std::endl;
     else
@@ -139,6 +161,12 @@ int main()
     unsigned int shader = createShader(source.vertexSource, source.fragmentSource);
     glUseProgram(shader);
 
+    GLCall(int location = glGetUniformLocation(shader, "u_Color"));
+    ASSERT(location != -1);
+    GLCall(glUniform4f(location, 0.25f, 0.75f, 0.0f, 1.0f));
+
+    float r = 0.0f;
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -153,9 +181,13 @@ int main()
         glVertex2f(-0.5f,0.0f);
         glEnd();(*/
 
-        //glDrawArrays(GL_TRIANGLES, 0, 3);
-        glDrawElements(GL_TRIANGLES, 6,GL_UNSIGNED_INT, nullptr);
+        r+=0.02f;
+        if(r>1.0f)
+            r=0.0f;
 
+        //glDrawArrays(GL_TRIANGLES, 0, 3);
+        GLCall(glUniform4f(location, r, 0.75f, 0.2f, 1.0f));
+        GLCall(glDrawElements(GL_TRIANGLES, 6,GL_UNSIGNED_INT, nullptr));
         // // // MY CODE ENDS HERE
 
         /* Swap front and back buffers */
