@@ -1,8 +1,50 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <fstream>
+#include <sstream>
 
-static unsigned int CompileShader(const std::string& source, unsigned int type)
+struct ShaderProgramSource
+{
+    std::string vertexSource;
+    std::string fragmentSource;
+};
+
+static ShaderProgramSource parseShader(const std::string& filepath)
+{
+    std::ifstream stream(filepath);
+
+    enum class ShaderType
+    {
+        NONE = -1, VERTEX = 0, FRAGMENT = 1
+    };
+
+    std::stringstream ss[2];
+    ShaderType shaderType = ShaderType::NONE;
+    std::string line;
+    while(getline(stream,line))
+    {
+        if(line.find("#shader") != std::string::npos)
+        {
+            if(line.find("vertex") != std::string::npos)
+            {
+                shaderType = ShaderType::VERTEX;
+            }
+            else if(line.find("fragment") != std::string::npos)
+            {
+                shaderType = ShaderType::FRAGMENT;
+            }
+        }
+        else
+        {
+            ss[(int)shaderType] << line << '\n';
+        }
+    }
+
+    return { ss[0].str(), ss[1].str() };
+}
+
+static unsigned int compileShader(const std::string& source, unsigned int type)
 {
     unsigned int id = glCreateShader(type);
     const char* src = source.c_str();
@@ -28,8 +70,8 @@ static unsigned int CompileShader(const std::string& source, unsigned int type)
 static unsigned int createShader(const std::string& vertexShader, const std::string& fragmentShader)
 {
     unsigned int program = glCreateProgram();
-    unsigned int vs = CompileShader(vertexShader, GL_VERTEX_SHADER);
-    unsigned int fs = CompileShader(fragmentShader, GL_FRAGMENT_SHADER);
+    unsigned int vs = compileShader(vertexShader, GL_VERTEX_SHADER);
+    unsigned int fs = compileShader(fragmentShader, GL_FRAGMENT_SHADER);
 
     glAttachShader(program, vs);
     glAttachShader(program, fs);
@@ -68,37 +110,33 @@ int main()
     else
         std::cout << glGetString(GL_VERSION) << std::endl;
 
-    float positions[6] = {
+    float positions[] = {
             0.0f, 0.5f,
             0.5f, 0.5f,
-            -0.5f, 0.0f
+            -0.5f, 0.0f,
+            -0.5f, -0.5f
     };
+
+    unsigned int indices[] = {
+            0, 1, 2,
+            2,3,0
+    };
+
     unsigned int buffer;
     glGenBuffers(1,&buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof positions, positions, GL_STATIC_DRAW);
 
-    std::string vertexShader =
-            "#version 330 core\n"
-            "\n"
-            "layout(location = 0) in vec4 position;"
-            "\n"
-            "void main()\n"
-            "{\n"
-            "   gl_Position = position;\n"
-            "}\n";
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 
-    std::string fragmentShader =
-            "#version 330 core\n"
-            "\n"
-            "layout(location = 0) out vec4 color;\n"
-            "\n"
-            "void main()\n"
-            "{\n"
-            "   color = vec4(1.0, 0.0, 0.0, 1.0);\n"
-            "}\n";
+    unsigned int indexBufferObject;
+    glGenBuffers(1,&indexBufferObject);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObject);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof (indices), indices, GL_STATIC_DRAW);
 
-    unsigned int shader = createShader(vertexShader, fragmentShader);
+    ShaderProgramSource source = parseShader("../res/shaders/basic.shader");
+    unsigned int shader = createShader(source.vertexSource, source.fragmentSource);
     glUseProgram(shader);
 
     /* Loop until the user closes the window */
@@ -115,9 +153,8 @@ int main()
         glVertex2f(-0.5f,0.0f);
         glEnd();(*/
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+        //glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 6,GL_UNSIGNED_INT, nullptr);
 
         // // // MY CODE ENDS HERE
 
