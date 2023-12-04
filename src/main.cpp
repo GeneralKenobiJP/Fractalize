@@ -114,6 +114,10 @@ int main()
     if (!glfwInit())
         return -1;
 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
     /* Create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
     if (!window)
@@ -144,6 +148,10 @@ int main()
             2,3,0
     };
 
+    unsigned int vertexArrayObjects;
+    GLCall(glGenVertexArrays(1,&vertexArrayObjects));
+    GLCall(glBindVertexArray(vertexArrayObjects));
+
     unsigned int buffer;
     glGenBuffers(1,&buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
@@ -165,6 +173,11 @@ int main()
     ASSERT(location != -1);
     GLCall(glUniform4f(location, 0.25f, 0.75f, 0.0f, 1.0f));
 
+    GLCall(glBindVertexArray(0));
+    GLCall(glUseProgram(0));
+    GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+    GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+
     float r = 0.0f;
 
     /* Loop until the user closes the window */
@@ -175,19 +188,18 @@ int main()
 
         // // // MY CODE STARTS HERE
 
-        /*glBegin(GL_TRIANGLES);
-        glVertex2f(0.0f,0.5f);
-        glVertex2f(0.5f,0.5f);
-        glVertex2f(-0.5f,0.0f);
-        glEnd();(*/
-
         r+=0.02f;
         if(r>1.0f)
             r=0.0f;
 
-        //glDrawArrays(GL_TRIANGLES, 0, 3);
+        GLCall(glUseProgram(shader));
         GLCall(glUniform4f(location, r, 0.75f, 0.2f, 1.0f));
+
+        GLCall(glBindVertexArray(vertexArrayObjects));
+        GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObject));
+
         GLCall(glDrawElements(GL_TRIANGLES, 6,GL_UNSIGNED_INT, nullptr));
+
         // // // MY CODE ENDS HERE
 
         /* Swap front and back buffers */
