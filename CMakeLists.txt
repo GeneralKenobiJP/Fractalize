@@ -3,7 +3,13 @@ project(Fractalize)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Fractalize src/main.cpp)
+add_executable(Fractalize src/main.cpp
+        src/Renderer.cpp
+        src/Renderer.h
+        src/VertexBuffer.cpp
+        src/VertexBuffer.h
+        src/IndexBuffer.cpp
+        src/IndexBuffer.h)
 
 include_directories(include)
 include_directories(lib)
