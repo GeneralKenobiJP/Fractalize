@@ -9,7 +9,11 @@ add_executable(Fractalize src/main.cpp
         src/VertexBuffer.cpp
         src/VertexBuffer.h
         src/IndexBuffer.cpp
-        src/IndexBuffer.h)
+        src/IndexBuffer.h
+        src/VertexArray.cpp
+        src/VertexArray.h
+        src/BufferLayout.cpp
+        src/BufferLayout.h)
 
 include_directories(include)
 include_directories(lib)

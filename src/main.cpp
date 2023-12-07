@@ -6,6 +6,7 @@
 #include "Renderer.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+#include "VertexArray.h"
 
 struct ShaderProgramSource
 {
@@ -137,16 +138,18 @@ int main()
         GLCall(glGenVertexArrays(1, &vertexArrayObjects));
         GLCall(glBindVertexArray(vertexArrayObjects));
 
-        VertexBuffer vertexBuffer(positions, sizeof positions);
+        VertexArray vertexArray;
+        VertexBuffer vertexBuffer(positions, sizeof (positions));
 
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+        BufferLayout bufferLayout;
+        bufferLayout.push<float>(2);
+        vertexArray.addBuffer(vertexBuffer, bufferLayout);
 
         IndexBuffer indexBuffer(indices, 6);
 
         ShaderProgramSource source = parseShader("../res/shaders/basic.shader");
         unsigned int shader = createShader(source.vertexSource, source.fragmentSource);
-        glUseProgram(shader);
+        GLCall(glUseProgram(shader));
 
         GLCall(int location = glGetUniformLocation(shader, "u_Color"));
         ASSERT(location != -1);
@@ -163,7 +166,7 @@ int main()
         while (!glfwWindowShouldClose(window))
         {
             /* Render here */
-            glClear(GL_COLOR_BUFFER_BIT);
+            GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
             // // // MY CODE STARTS HERE
 
@@ -174,7 +177,7 @@ int main()
             GLCall(glUseProgram(shader));
             GLCall(glUniform4f(location, r, 0.75f, 0.2f, 1.0f));
 
-            GLCall(glBindVertexArray(vertexArrayObjects));
+            vertexArray.bind();
             indexBuffer.bind();
 
             GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));

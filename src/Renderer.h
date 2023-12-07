@@ -10,7 +10,7 @@
 #define ASSERT(x) if(!(x)) __builtin_trap();
 #define GLCall(x) Renderer::GLClearError(); \
     x;                            \
-    ASSERT(Renderer::GLLogCall());
+    ASSERT(Renderer::GLLogCall(__FILE__,__LINE__))
 #if false
 #endif
 
@@ -19,6 +19,6 @@ class Renderer
 public:
     static void GLClearError();
 
-    static bool GLLogCall();
+    static bool GLLogCall(const char* file, int line);
 
 };
