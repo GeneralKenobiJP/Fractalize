@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Fractalize::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Fractalize-Debug-26b5cbdffa29a169f140.json",
+					"jsonFile" : "target-Fractalize-Debug-ceb2cc7c809f3302c824.json",
 					"name" : "Fractalize",
 					"projectIndex" : 0
 				}
@@ -49,7 +49,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/kubap/CLionProjects/Fractalize/cmake-build-debug-1",
+		"build" : "C:/Users/kubap/CLionProjects/Fractalize/cmake-build-debug",
 		"source" : "C:/Users/kubap/CLionProjects/Fractalize"
 	},
 	"version" : 
