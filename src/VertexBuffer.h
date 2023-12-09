@@ -4,6 +4,7 @@
 
 #pragma once
 
+//this is vertex data
 class VertexBuffer
 {
 private:

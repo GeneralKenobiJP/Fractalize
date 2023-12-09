@@ -3,7 +3,7 @@
 //
 
 #include "IndexBuffer.h"
-#include "Renderer.h"
+#include "GL_Handler.h"
 
 IndexBuffer::IndexBuffer(const unsigned int *data, unsigned int count)
 : count(count)

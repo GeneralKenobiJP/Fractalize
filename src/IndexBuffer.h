@@ -4,7 +4,7 @@
 
 #pragma once
 
-
+//this stores data on indices
 class IndexBuffer
 {
 private:
@@ -17,5 +17,5 @@ public:
     void bind() const;
     void unbind() const;
 
-    inline unsigned int getCount() const;
+    unsigned int getCount() const;
 };

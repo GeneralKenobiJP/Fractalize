@@ -3,7 +3,7 @@
 //
 
 #include "BufferLayout.h"
-#include "Renderer.h"
+#include "GL_Handler.h"
 
 template<typename T>
 void BufferLayout::push(unsigned int count)

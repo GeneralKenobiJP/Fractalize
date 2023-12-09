@@ -8,6 +8,7 @@
 #include "VertexBuffer.h"
 #include "BufferLayout.h"
 
+// this binds vertex data to layout data
 class VertexArray
 {
 private:

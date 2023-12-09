@@ -15,6 +15,7 @@ struct BufferElement
     static unsigned int getTypeSize(unsigned int type);
 };
 
+//this stores how many shapes there are
 class BufferLayout
 {
 private:

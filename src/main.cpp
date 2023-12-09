@@ -1,13 +1,12 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <fstream>
-#include <sstream>
 #include "Renderer.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "VertexArray.h"
 #include "Shader.h"
+#include "BufferLayout.h"
 
 int main()
 {
@@ -77,15 +76,16 @@ int main()
         indexBuffer.unbind();
         shader.unbind();
 
+        Renderer renderer;
+
         float r = 0.0f;
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
             /* Render here */
-            GLCall(glClear(GL_COLOR_BUFFER_BIT));
-
             // // // MY CODE STARTS HERE
+            renderer.clear();
 
             r += 0.02f;
             if (r > 1.0f)
@@ -94,10 +94,7 @@ int main()
             shader.bind();
             shader.setUniform4f("u_Color", r, 0.75f, 0.2f, 1.0f );
 
-            vertexArray.bind();
-            indexBuffer.bind();
-
-            GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+            renderer.draw(vertexArray, indexBuffer, shader);
 
             // // // MY CODE ENDS HERE
 

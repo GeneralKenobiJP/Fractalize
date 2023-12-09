@@ -9,8 +9,8 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include "Renderer.h"
 #include <unordered_map>
+#include "GL_Handler.h"
 
 struct ShaderProgramSource
 {

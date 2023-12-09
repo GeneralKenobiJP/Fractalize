@@ -6,19 +6,17 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
-#define ASSERT(x) if(!(x)) __builtin_trap();
-#define GLCall(x) Renderer::GLClearError(); \
-    x;                            \
-    ASSERT(Renderer::GLLogCall(__FILE__,__LINE__))
-#if false
-#endif
+#include "VertexArray.h"
+#include "IndexBuffer.h"
+#include "Shader.h"
+#include "GL_Handler.h"
 
 class Renderer
 {
+private:
+
 public:
-    static void GLClearError();
 
-    static bool GLLogCall(const char* file, int line);
-
+    void draw(const VertexArray& vertexArray, const IndexBuffer& indexBuffer, const Shader& shader) const;
+    void clear() const;
 };
