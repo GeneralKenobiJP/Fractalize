@@ -58,3 +58,10 @@
 638	1544	7238575297235360	Fractalize.exe	9d95b09b3c6e0235
 3	625	7238575588579380	CMakeFiles/Fractalize.dir/src/main.cpp.obj	31e0e98e2bd40bca
 625	1541	7238575597697532	Fractalize.exe	9d95b09b3c6e0235
+26	231	7240210251774673	CMakeFiles/Fractalize.dir/src/VertexBuffer.cpp.obj	428ec9a9d05533d4
+19	234	7240210251819542	CMakeFiles/Fractalize.dir/src/IndexBuffer.cpp.obj	398fbcff80375eac
+42	499	7240210254459463	CMakeFiles/Fractalize.dir/src/VertexArray.cpp.obj	5dc4d6b575f7c7c3
+33	548	7240210254961115	CMakeFiles/Fractalize.dir/src/BufferLayout.cpp.obj	ad2565dc03037c70
+4	870	7240210258170615	CMakeFiles/Fractalize.dir/src/Renderer.cpp.obj	1f9600a7f47eda83
+13	933	7240210258797290	CMakeFiles/Fractalize.dir/src/main.cpp.obj	31e0e98e2bd40bca
+933	2026	7240210269673802	Fractalize.exe	9d95b09b3c6e0235
