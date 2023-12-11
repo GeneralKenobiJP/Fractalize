@@ -8,6 +8,9 @@
 #include "Shader.h"
 #include "BufferLayout.h"
 
+const int RESOLUTION_X = 1000;
+const int RESOLUTION_Y = 800;
+
 int main()
 {
     std::cout << "Hello, World" << std::endl;
@@ -23,7 +26,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Fractalize", NULL, NULL);
+    window = glfwCreateWindow(RESOLUTION_X, RESOLUTION_Y, "Fractalize", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -43,10 +46,10 @@ int main()
     {
 
         float positions[] = {
-                0.0f, 0.5f,
-                0.5f, 0.5f,
-                -0.5f, 0.0f,
-                -0.5f, -0.5f
+                1.0f, 1.0f,
+                -1.0f, 1.0f,
+                -1.0f, -1.0f,
+                1.0f, -1.0f
         };
 
         unsigned int indices[] = {
@@ -67,9 +70,9 @@ int main()
 
         IndexBuffer indexBuffer(indices, 6);
 
-        Shader shader("../res/shaders/basic.shader");
+        Shader shader("../res/shaders/fractal.shader");
         shader.bind();
-        shader.setUniform4f("u_Color", 0.25f, 0.75f, 0.1f, 1.0f);
+        //shader.setUniform4f("u_Color", 0.25f, 0.75f, 0.1f, 1.0f);
 
         vertexArray.unbind();
         vertexBuffer.unbind();
@@ -78,8 +81,6 @@ int main()
 
         Renderer renderer;
 
-        float r = 0.0f;
-
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
@@ -87,12 +88,8 @@ int main()
             // // // MY CODE STARTS HERE
             renderer.clear();
 
-            r += 0.02f;
-            if (r > 1.0f)
-                r = 0.0f;
-
             shader.bind();
-            shader.setUniform4f("u_Color", r, 0.75f, 0.2f, 1.0f );
+            //shader.setUniform4f("u_Color", r, 0.75f, 0.2f, 1.0f );
 
             renderer.draw(vertexArray, indexBuffer, shader);
 
