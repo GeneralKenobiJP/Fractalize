@@ -37,7 +37,10 @@ public:
     unsigned int createShader(const std::string& vertexShader, const std::string& fragmentShader);
 
     // set uniforms
-    void setUniform4f(const std::string &name, float v0, float v1, float v2, float v3);
+    void setUniform(const std::string &name, float v0, float v1, float v2, float v3);
+    void setUniform(const std::string &name, float v0, float v1, float v2);
+    void setUniform(const std::string &name, float v0, float v1);
+    void setUniform(const std::string &name, float v0);
 private:
     int getUniformLocation(const std::string &name);
 };

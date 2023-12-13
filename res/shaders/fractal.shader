@@ -14,18 +14,20 @@ void main()
 
 #define M_PI 3.1415926535897932384626433832795
 
-layout(location = 0) out vec4 color;
-vec2 shift = vec2(-0.75,0.0);
-//vec2 shift = vec2(0.0,0.0);
-float scale = 2.25;
-//float scale = 2.0;
+uniform float scale_input;
+uniform vec2 shift_input;
+uniform vec2 resolution;
 
-uniform vec2 resolution = vec2(1000,800);
+layout(location = 0) out vec4 color;
+vec2 shift = vec2(-0.75+shift_input.x,0.0+shift_input.y);
+float scale = 2.25 / scale_input;
+
+//uniform vec2 resolution = vec2(1000,800);
 
 //uniform vec2 juliaNumber = vec2(-0.70176, -0.3842);
 uniform vec2 juliaNumber = vec2(-0.8, 0.156);
 
-const int MAX_ITER = 250;
+const int MAX_ITER = 5000;
 
 vec3 mandelbrot(vec2 coord)
 {
@@ -80,6 +82,7 @@ vec3 julia(vec2 coord)
 
 void main()
 {
+
     vec2 coord = (gl_FragCoord.xy - 0.5 * resolution.xy) / resolution.y;
 
     vec3 iter_color = mandelbrot(coord);

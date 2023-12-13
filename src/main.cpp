@@ -7,9 +7,10 @@
 #include "VertexArray.h"
 #include "Shader.h"
 #include "BufferLayout.h"
+#include "InputHandler.h"
 
-const int RESOLUTION_X = 1000;
-const int RESOLUTION_Y = 800;
+const int RESOLUTION_X = 1920;
+const int RESOLUTION_Y = 1080;
 
 int main()
 {
@@ -81,6 +82,13 @@ int main()
 
         Renderer renderer;
 
+        shader.bind();
+        shader.setUniform("resolution", RESOLUTION_X, RESOLUTION_Y);
+        shader.setUniform("scale_input", 1.0);
+        shader.setUniform("shift_input", 0.0, 0.0);
+
+        //glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
+
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
@@ -89,9 +97,12 @@ int main()
             renderer.clear();
 
             shader.bind();
-            //shader.setUniform4f("u_Color", r, 0.75f, 0.2f, 1.0f );
 
             renderer.draw(vertexArray, indexBuffer, shader);
+
+            glfwSetKeyCallback(window, InputHandler::keyInput);
+            shader.setUniform("scale_input", InputHandler::scale);
+            shader.setUniform("shift_input", InputHandler::shift.first, InputHandler::shift.second);
 
             // // // MY CODE ENDS HERE
 

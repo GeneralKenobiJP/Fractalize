@@ -17,7 +17,9 @@ add_executable(Fractalize src/main.cpp
         src/Shader.cpp
         src/Shader.h
         src/GL_Handler.cpp
-        src/GL_Handler.h)
+        src/GL_Handler.h
+        src/InputHandler.cpp
+        src/InputHandler.h)
 
 include_directories(include)
 include_directories(lib)
