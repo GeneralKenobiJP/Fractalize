@@ -3,6 +3,7 @@
 //
 
 #include "Shader.h"
+#include "GLM/glm/gtc/type_ptr.hpp"
 
 Shader::Shader(const std::string &filepath)
     : filepath(filepath), rendererID(0)
@@ -128,6 +129,13 @@ int Shader::getUniformLocation(const std::string &name)
 
     uniformLocationCache[name] = location;
     return location;
+}
+
+void Shader::setUniformVecArray(const std::string &name, int count, const glm::vec4 *vecArray)
+{
+    std::cout << vecArray[49][0] << std::endl;
+    std::cout << getUniformLocation(name) << std::endl;
+    GLCall(glUniform4fv(getUniformLocation(name), count, glm::value_ptr(vecArray[0])));
 }
 
 

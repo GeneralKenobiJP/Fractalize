@@ -8,6 +8,7 @@
 #include "Shader.h"
 #include "BufferLayout.h"
 #include "InputHandler.h"
+#include "FractalSettings.h"
 
 const int RESOLUTION_X = 1920;
 const int RESOLUTION_Y = 1080;
@@ -43,6 +44,8 @@ int main()
         std::cout << "Error. glewInit() != GLEW_OK" << std::endl;
     else
         std::cout << glGetString(GL_VERSION) << std::endl;
+
+    FractalSettings::setupColors();
 
     {
 
@@ -86,6 +89,9 @@ int main()
         shader.setUniform("resolution", RESOLUTION_X, RESOLUTION_Y);
         shader.setUniform("scale_input", 1.0);
         shader.setUniform("shift_input", 0.0, 0.0);
+
+        shader.setUniformVecArray("colorScheme", FractalSettings::MAX_ITER, FractalSettings::colors);
+        
 
         //glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
 
