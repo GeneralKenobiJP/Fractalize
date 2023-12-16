@@ -59,3 +59,7 @@
 4	1860	7244397725362959	CMakeFiles/Fractalize.dir/src/main.cpp.obj	bc3ff6fb8bebcdd5
 11	2134	7244397728057425	CMakeFiles/Fractalize.dir/src/Shader.cpp.obj	2be91251dee6f5e8
 2134	3412	7244397740756561	Fractalize.exe	b7ce7c7efeb6d99b
+5	175	7244418643953255	CMakeFiles/Fractalize.dir/src/InputHandler.cpp.obj	53db7f874488aa6a
+175	1128	7244418653413758	Fractalize.exe	b7ce7c7efeb6d99b
+3	183	7244419316383806	CMakeFiles/Fractalize.dir/src/InputHandler.cpp.obj	53db7f874488aa6a
+183	1186	7244419326388548	Fractalize.exe	b7ce7c7efeb6d99b

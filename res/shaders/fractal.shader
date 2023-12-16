@@ -14,7 +14,7 @@ void main()
 
 #define M_PI 3.1415926535897932384626433832795
 
-const int MAX_ITER = 1500;
+const int MAX_ITER = 8000;
 
 uniform float scale_input;
 uniform vec2 shift_input;

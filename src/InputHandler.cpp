@@ -56,6 +56,14 @@ void InputHandler::keyInput(GLFWwindow* window, int key, int scancode, int actio
             case GLFW_KEY_C:
                 scaleSpeed = 0.1f;
                 break;
+            case GLFW_KEY_K:
+                scaleSpeed += 6.0f;
+                break;
+            case GLFW_KEY_J:
+                scaleSpeed -= 6.0f;
+                if(scaleSpeed < 0.01f)
+                    scaleSpeed = 0.01f;
+                break;
         }
     }
 }
