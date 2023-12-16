@@ -36,7 +36,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 40,
+				"line" : 42,
 				"parent" : 0
 			},
 			{
@@ -55,6 +55,12 @@
 				"command" : 3,
 				"file" : 0,
 				"line" : 27,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 40,
 				"parent" : 0
 			}
 		]
@@ -84,6 +90,10 @@
 				{
 					"backtrace" : 5,
 					"path" : "C:/Users/kubap/CLionProjects/Fractalize/lib"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "C:/Users/kubap/CLionProjects/Fractalize/lib/GLM/glm"
 				},
 				{
 					"backtrace" : 2,

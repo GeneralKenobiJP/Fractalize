@@ -14,23 +14,20 @@ void main()
 
 #define M_PI 3.1415926535897932384626433832795
 
-const int MAX_ITER = 5000;
+const int MAX_ITER = 1500;
 
 uniform float scale_input;
 uniform vec2 shift_input;
 uniform vec2 resolution;
-uniform vec4 colorScheme[MAX_ITER];
 
 layout(location = 0) out vec4 color;
+
 vec2 shift = vec2(-0.75+shift_input.x,0.0+shift_input.y);
 float scale = 2.25 / scale_input;
 
-//uniform vec2 resolution = vec2(1000,800);
-
-//uniform vec2 juliaNumber = vec2(-0.70176, -0.3842);
 uniform vec2 juliaNumber = vec2(-0.8, 0.156);
 
-int mandelbrot(vec2 coord)
+float mandelbrot(vec2 coord)
 {
     coord *= scale;
 
@@ -54,7 +51,7 @@ int mandelbrot(vec2 coord)
     //if(iter == 0)
       //  iter = MAX_ITER + 50;
 
-    return iter;
+    return float(iter) / float(MAX_ITER);
 }
 
 vec3 julia(vec2 coord)
@@ -72,8 +69,6 @@ vec3 julia(vec2 coord)
            break;
 
         float aTemp = a;
-        //a = a + 2;
-        //b = b + 1;
         a = a * a - b * b + juliaNumber.x;
         b = 2.0 * aTemp * b + juliaNumber.y;
     }
@@ -81,24 +76,26 @@ vec3 julia(vec2 coord)
     return vec3(float(iter) / float(MAX_ITER));
 }
 
-const int test_int = 0;
-
 void main()
 {
 
     vec2 coord = (gl_FragCoord.xy - 0.5 * resolution.xy) / resolution.y;
 
-    int iter = mandelbrot(coord);
+    float iter = mandelbrot(coord);
     //vec3 iter_color = julia(coord);
 
-    //iter_color.x = 0.5*sin(M_PI*(10*iter_color.x-0.5))+0.5;
-    //iter_color.y = 0.5*sin(M_PI*(10*iter_color.y-0.5))+0.5;
-    //iter_color.z = tan(0.25*M_PI*iter_color.z);
+    if(iter != 0.0)
+    {
+        vec3 iter_color;
 
-    //color = vec4(iter_color, 1.0);
-    vec4 thisVec = colorScheme[test_int];
+        iter_color.x = 0.5*sin(M_PI*(10*iter-0.5))+0.5;
+        iter_color.y = 0.5*sin(M_PI*(10*iter-0.5))+0.5;
+        iter_color.z = tan(0.25*M_PI*iter);
 
-    //colorScheme[test_int] = vec4(1.0,0.0,0.7,1.0);
-    color = vec4(1.0,1.0,0.2,1.0);
-   // color = colorScheme[0];
+        color = vec4(iter_color, 1.0);
+    }
+    else
+    {
+        color = vec4(0.0,0.0,0.0,1.0);
+    }
 };

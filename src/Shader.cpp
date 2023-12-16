@@ -133,8 +133,6 @@ int Shader::getUniformLocation(const std::string &name)
 
 void Shader::setUniformVecArray(const std::string &name, int count, const glm::vec4 *vecArray)
 {
-    std::cout << vecArray[49][0] << std::endl;
-    std::cout << getUniformLocation(name) << std::endl;
     GLCall(glUniform4fv(getUniformLocation(name), count, glm::value_ptr(vecArray[0])));
 }
 
