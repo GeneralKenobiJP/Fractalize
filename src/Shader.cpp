@@ -3,6 +3,7 @@
 //
 
 #include "Shader.h"
+#include "GLM/glm/gtc/type_ptr.hpp"
 
 Shader::Shader(const std::string &filepath)
     : filepath(filepath), rendererID(0)
@@ -100,9 +101,21 @@ void Shader::unbind() const
     GLCall(glUseProgram(0));
 }
 
-void Shader::setUniform4f(const std::string &name, float v0, float v1, float v2, float v3)
+void Shader::setUniform(const std::string &name, float v0, float v1, float v2, float v3)
 {
     GLCall(glUniform4f(getUniformLocation(name), v0, v1, v2, v3));
+}
+void Shader::setUniform(const std::string &name, float v0, float v1, float v2)
+{
+    GLCall(glUniform3f(getUniformLocation(name), v0, v1, v2));
+}
+void Shader::setUniform(const std::string &name, float v0, float v1)
+{
+    GLCall(glUniform2f(getUniformLocation(name), v0, v1));
+}
+void Shader::setUniform(const std::string &name, float v0)
+{
+    GLCall(glUniform1f(getUniformLocation(name), v0));
 }
 
 int Shader::getUniformLocation(const std::string &name)
@@ -116,6 +129,11 @@ int Shader::getUniformLocation(const std::string &name)
 
     uniformLocationCache[name] = location;
     return location;
+}
+
+void Shader::setUniformVecArray(const std::string &name, int count, const glm::vec4 *vecArray)
+{
+    GLCall(glUniform4fv(getUniformLocation(name), count, glm::value_ptr(vecArray[0])));
 }
 
 

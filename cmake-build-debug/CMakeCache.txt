@@ -248,6 +248,9 @@ Fractalize_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 Fractalize_SOURCE_DIR:STATIC=C:/Users/kubap/CLionProjects/Fractalize
 
+//The directory containing a CMake configuration file for glm.
+glm_DIR:PATH=glm_DIR-NOTFOUND
+
 
 ########################
 # INTERNAL cache entries

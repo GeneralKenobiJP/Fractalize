@@ -7,6 +7,11 @@
 #include "VertexArray.h"
 #include "Shader.h"
 #include "BufferLayout.h"
+#include "InputHandler.h"
+//#include "FractalSettings.h"
+
+const int RESOLUTION_X = 1920;
+const int RESOLUTION_Y = 1080;
 
 int main()
 {
@@ -23,7 +28,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Fractalize", NULL, NULL);
+    window = glfwCreateWindow(RESOLUTION_X, RESOLUTION_Y, "Fractalize", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -40,13 +45,15 @@ int main()
     else
         std::cout << glGetString(GL_VERSION) << std::endl;
 
+    //FractalSettings::setupColors();
+
     {
 
         float positions[] = {
-                0.0f, 0.5f,
-                0.5f, 0.5f,
-                -0.5f, 0.0f,
-                -0.5f, -0.5f
+                1.0f, 1.0f,
+                -1.0f, 1.0f,
+                -1.0f, -1.0f,
+                1.0f, -1.0f
         };
 
         unsigned int indices[] = {
@@ -67,9 +74,9 @@ int main()
 
         IndexBuffer indexBuffer(indices, 6);
 
-        Shader shader("../res/shaders/basic.shader");
+        Shader shader("../res/shaders/fractal.shader");
+
         shader.bind();
-        shader.setUniform4f("u_Color", 0.25f, 0.75f, 0.1f, 1.0f);
 
         vertexArray.unbind();
         vertexBuffer.unbind();
@@ -78,7 +85,10 @@ int main()
 
         Renderer renderer;
 
-        float r = 0.0f;
+        shader.bind();
+        shader.setUniform("resolution", RESOLUTION_X, RESOLUTION_Y);
+        shader.setUniform("scale_input", 1.0);
+        shader.setUniform("shift_input", 0.0, 0.0);
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
@@ -87,14 +97,13 @@ int main()
             // // // MY CODE STARTS HERE
             renderer.clear();
 
-            r += 0.02f;
-            if (r > 1.0f)
-                r = 0.0f;
-
             shader.bind();
-            shader.setUniform4f("u_Color", r, 0.75f, 0.2f, 1.0f );
 
             renderer.draw(vertexArray, indexBuffer, shader);
+
+            glfwSetKeyCallback(window, InputHandler::keyInput);
+            shader.setUniform("scale_input", InputHandler::scale);
+            shader.setUniform("shift_input", InputHandler::shift.first, InputHandler::shift.second);
 
             // // // MY CODE ENDS HERE
 

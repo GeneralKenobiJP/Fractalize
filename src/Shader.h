@@ -11,6 +11,7 @@
 #include <fstream>
 #include <unordered_map>
 #include "GL_Handler.h"
+#include <glm/glm/vec4.hpp>
 
 struct ShaderProgramSource
 {
@@ -37,7 +38,11 @@ public:
     unsigned int createShader(const std::string& vertexShader, const std::string& fragmentShader);
 
     // set uniforms
-    void setUniform4f(const std::string &name, float v0, float v1, float v2, float v3);
+    void setUniform(const std::string &name, float v0, float v1, float v2, float v3);
+    void setUniform(const std::string &name, float v0, float v1, float v2);
+    void setUniform(const std::string &name, float v0, float v1);
+    void setUniform(const std::string &name, float v0);
+    void setUniformVecArray(const std::string &name, int count, const glm::vec4 *vecArray);
 private:
     int getUniformLocation(const std::string &name);
 };
