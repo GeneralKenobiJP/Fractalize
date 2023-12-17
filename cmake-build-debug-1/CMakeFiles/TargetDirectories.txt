@@ -1,3 +1,0 @@
-C:/Users/kubap/CLionProjects/Fractalize/cmake-build-debug-1/CMakeFiles/Fractalize.dir
-C:/Users/kubap/CLionProjects/Fractalize/cmake-build-debug-1/CMakeFiles/edit_cache.dir
-C:/Users/kubap/CLionProjects/Fractalize/cmake-build-debug-1/CMakeFiles/rebuild_cache.dir

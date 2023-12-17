@@ -3,6 +3,10 @@ project(Fractalize)
 
 set(CMAKE_CXX_STANDARD 20)
 
+#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 add_executable(Fractalize src/main.cpp
         src/Renderer.cpp
         src/Renderer.h
@@ -40,3 +44,9 @@ set_target_properties(glew PROPERTIES
 include_directories(lib/GLM/glm)
 
 target_link_libraries(Fractalize glew GLFW Opengl32.lib User32.lib Gdi32.lib Shell32.lib)
+
+target_compile_options(Fractalize PRIVATE -static-libgcc -static-libstdc++)
+
+if(WIN32)
+    target_compile_definitions("${CMAKE_PROJECT_NAME}" PUBLIC _WIN32)
+endif()
