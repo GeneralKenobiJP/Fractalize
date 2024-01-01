@@ -1,0 +1,13 @@
+# ninja log v5
+12	321	7258083891361125	CMakeFiles/Fractalize.dir/src/IndexBuffer.cpp.obj	4d64a82d930342a0
+18	325	7258083891401129	CMakeFiles/Fractalize.dir/src/VertexBuffer.cpp.obj	43870b46027ff4b6
+56	374	7258083891886289	CMakeFiles/Fractalize.dir/src/InputHandler.cpp.obj	5816711f992ffd7a
+26	519	7258083893334209	CMakeFiles/Fractalize.dir/src/VertexArray.cpp.obj	d413d8808d8034db
+34	561	7258083893771167	CMakeFiles/Fractalize.dir/src/BufferLayout.cpp.obj	43774c26bb0536a5
+67	677	7258083894942032	CMakeFiles/Fractalize.dir/src/GL_Handler.cpp.obj	3867672a6380fa61
+10	521	7258084449960388	CMakeFiles/Fractalize.dir/src/Renderer.cpp.obj	ad9ecad9be731875
+3	575	7258084450492609	CMakeFiles/Fractalize.dir/src/main.cpp.obj	9bea64778cbb14ea
+3	717	7258084620698052	CMakeFiles/Fractalize.dir/src/Shader.cpp.obj	952887dd5b24a75e
+717	1630	7258084629790574	Fractalize.exe	d6aa3f45167df100
+3	550	7258088478139670	CMakeFiles/Fractalize.dir/src/main.cpp.obj	9bea64778cbb14ea
+551	1443	7258088487000571	Fractalize.exe	d6aa3f45167df100
