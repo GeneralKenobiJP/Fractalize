@@ -8,7 +8,6 @@
 #include "Shader.h"
 #include "BufferLayout.h"
 #include "InputHandler.h"
-//#include "FractalSettings.h"
 
 const int RESOLUTION_X = 1920;
 const int RESOLUTION_Y = 1080;
