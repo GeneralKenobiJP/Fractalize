@@ -73,7 +73,7 @@ int main()
 
         IndexBuffer indexBuffer(indices, 6);
 
-        Shader shader("../res/shaders/fractal_smooth.shader");
+        Shader shader("../res/shaders/fractal.shader");
 
         shader.bind();
 

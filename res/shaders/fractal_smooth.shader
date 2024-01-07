@@ -1,3 +1,5 @@
+//temporarily bullshit
+
 #shader vertex
 #version 460 core
 
@@ -52,7 +54,7 @@ float mandelbrot(vec2 coord)
     //if(iter == 0)
       //  iter = MAX_ITER + 50;
 
-    return a*a + b*b;
+    return iter + 1 - log(log2(a*a+b*b));
 }
 
 vec3 julia(vec2 coord)
@@ -82,21 +84,14 @@ void main()
 
     vec2 coord = (gl_FragCoord.xy - 0.5 * resolution.xy) / resolution.y;
 
-    float iter = mandelbrot(coord);
+    float iter = mandelbrot(coord)/MAX_ITER;
     //vec3 iter_color = julia(coord);
 
-    if(iter != 0.0)
-    {
-        vec3 iter_color;
+    vec3 iter_color;
 
-        iter_color.x = log(iter)/log(MAX_ITER);
-        iter_color.y = log(iter)/log(MAX_ITER);
-        iter_color.z = log(iter)/log(MAX_ITER);
+    iter_color.x = iter;
+    iter_color.y = pow(iter,2);
+    iter_color.z = pow(iter,3);//0.5+0.5*sin(iter);
 
-        color = vec4(iter_color, 1.0);
-    }
-    else
-    {
-        color = vec4(0.0,0.0,0.0,1.0);
-    }
+    color = vec4(iter_color, 1.0);
 };
